@@ -1,0 +1,19 @@
+{
+  "name": "videobuilder",
+  "version": "1.0.0",
+  "description": "OpenSoucer for an automatic video maker.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tavares304/VideoBuilder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tavares304/VideoBuilder/issues"
+  },
+  "homepage": "https://github.com/Tavares304/VideoBuilder#readme"
+}
