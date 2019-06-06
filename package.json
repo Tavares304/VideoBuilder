@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Tavares304/VideoBuilder/issues"
   },
-  "homepage": "https://github.com/Tavares304/VideoBuilder#readme"
+  "homepage": "https://github.com/Tavares304/VideoBuilder#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.9"
+  }
 }

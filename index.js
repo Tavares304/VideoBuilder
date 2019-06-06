@@ -1,5 +1,5 @@
 	const readline = require('readline-sync')
-function start() {
+	function start() {
 	const content = {}
 	
 	content.searchTerm = askAndReturnSearchTerm()
