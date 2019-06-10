@@ -19,22 +19,22 @@ async function robot(content) {
 
     function sanitizeContent(content) {
         const withoutBlankLinesAndMarkdown = removeBlankLinesAndMarkdown(content.sourceContentOriginal)
-        const withoutDatesinparentheses = removeDatesInParentheses(withoutBlankLinesAndMarkdown)
-        
-        content.sourceContentSanitized = withoutDatesinparentheses
-
+        const withoutDatesInParentheses = removeDatesInParentheses(withoutBlankLinesAndMarkdown)
+    
+        content.sourceContentSanitized = withoutDatesInParentheses
+    
         function removeBlankLinesAndMarkdown(text) {
-            const allLines = text.split('\n')
-
-            const withoutBlankLinesAndMarkdown = allLines.filter((line) => {
-                if (line.trim().length === 0 || lines.trim().startsWith('=')) {
-                    return false
-                }
-
-                return true
-            })
-
-            return withoutBlankLinesAndMarkdown.join(' ')
+          const allLines = text.split('\n')
+    
+          const withoutBlankLinesAndMarkdown = allLines.filter((line) => {
+            if (line.trim().length === 0 || line.trim().startsWith('=')) {
+              return false
+            }
+    
+            return true
+          })
+    
+          return withoutBlankLinesAndMarkdown.join(' ')
         }
     }
 
@@ -43,8 +43,16 @@ async function robot(content) {
     }
 
     function breakContentIntoSentences(content) {
+        content.sentences = []
+    
         const sentences = sentenceBoundaryDetection.sentences(content.sourceContentSanitized)
-        console.log(sentences)
+        sentences.forEach((sentence) => {
+          content.sentences.push({
+            text: sentence,
+            keywords: [],
+            images: []
+          })
+        })
     }
 
 }
