@@ -12,41 +12,34 @@ async function robot(content) {
         const wikipediaAkgorithm = algorithmiaAutheticated.algo('web/WikipediaParser/0.1.2')
         const wikipediaResponse = await wikipediaAkgorithm.pipe(content.searchTerm)
         const wikipediaContent = wikipediaResponse.get()
-        
+
         content.sourceContentOriginal = wikipediaContent.content
     }
 
     function sanitizeContent(content) {
-        const withoutBlankLines = removeBlankLines(content.sourceContentOriginal)
-        const withoutMarkdown = removeMarkdown(withoutBlankLines)
-        console.log(withoutMarkdown)
+        const withoutBlankLinesAndMarkdown = removeBlankLinesAndMarkdown(content.sourceContentOriginal)
+        const withoutDatesinparentheses = removeDatesInParentheses(withoutBlankLinesAndMarkdown)
+        console.log(withoutDatesinparentheses)
 
-        function removeBlankLines(text) {
+        function removeBlankLinesAndMarkdown(text) {
             const allLines = text.split('\n')
-            
+
             const withoutBlankLines = allLines.filter((line) => {
-                if (line.trim().length === 0) {
+                if (line.trim().length === 0 || lines.trim().startsWith('=')) {
                     return false
                 }
 
                 return true
             })
 
-            return withoutBlankLines
+            return withoutBlankLinesAndMarkdown.join(' ')
         }
     }
 
-    function removeMarkdown(lines) {
-        const withoutMarkdown = lines.filter((lines) => {
-            if (lines.trim().startsWith('=')) {
-                return false
-            }
-
-            return true
-        })
-
-        return withoutMarkdown
+    function removeDatesInParentheses(text) {
+        return text.replace(/\((?:\([^()]*\)|[^()])*\)/gm, '').replace(/  /g, ' ')
     }
+
 }
 
 module.exports = robot
