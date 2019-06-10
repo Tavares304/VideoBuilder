@@ -4,7 +4,7 @@ const algorithmiaApiKey = require('../credentials/algorithmia.json').apiKey
 
 async function robot(content) {
     await fetchContentFromWikipedia(content)
-    // sanitizeContent(content)
+    sanitizeContent(content)
     // breakContentIntoSentences(content)
 
     async function fetchContentFromWikipedia(content) {
@@ -14,6 +14,15 @@ async function robot(content) {
         const wikipediaContent = wikipediaResponse.get()
         
         content.sourceContentOriginal = wikipediaContent.content
+    }
+
+    function sanitizeContent(content) {
+        const withoutBlankLines = removeBlankLines(content.sourceContentOriginal)
+
+        function removeBlankLines(text) {
+            const allLines = text.split('\n')
+            console.log(allLines)
+        }
     }
 }
 
